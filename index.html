@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GameZone - Ultimate Gaming Hub</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+<style>
+        .popup-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.5s ease, visibility 0.5s ease;
+        }
+        .popup-content {
+            background: #1a1a1a;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 0 15px rgba(255, 215, 0, 0.5);
+            transform: scale(0.8);
+            transition: transform 0.5s ease;
+        }
+        .popup-overlay.show {
+            opacity: 1;
+            visibility: visible;
+        }
+        .popup-overlay.show .popup-content {
+            transform: scale(1);
+        }
+        .spin-wheel {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: conic-gradient(yellow 0deg, orange 90deg, red 180deg, purple 270deg, yellow 360deg);
+            animation: spin 3s linear infinite;
+            margin: 10px auto;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        .popup-content button {
+            margin-top: 10px;
+            background: #ffcc00;
+            color: black;
+            font-weight: bold;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-r from-purple-700 via-pink-600 to-red-500 text-white">
+<div id="popup" class="popup-overlay">
+        <div class="popup-content">
+            <h2 class="text-3xl font-bold text-yellow-400">🎰 Free Spin Offer! 🎰</h2>
+            <div class="spin-wheel"></div>
+            <p class="text-gray-300 mt-2">Spin the wheel and win exciting rewards!</p>
+            <button onclick="closePopup()">Claim Now</button>
+        </div>
+    </div>
+    <header class="bg-black bg-opacity-80 p-5 shadow-lg">
+        <div class="container mx-auto flex justify-between items-center">
+            <h1 class="text-4xl font-extrabold text-yellow-400">GameZone</h1>
+            <nav>
+                <ul class="flex space-x-6 text-lg font-semibold">
+                    <li><a href="#" class="hover:text-yellow-500">Home</a></li>
+                    <li><a href="#latest" class="hover:text-yellow-500">Latest</a></li>
+                    <li><a href="#trending" class="hover:text-yellow-500">Trending</a></li>
+                    <li><a href="#upcoming" class="hover:text-yellow-500">Upcoming</a></li>
+                    <li><a href="#casino" class="hover:text-yellow-500">Casino</a></li>
+                    <li><a href="#contact" class="hover:text-yellow-500">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    
+    <section class="relative w-full h-[500px] bg-cover bg-center flex flex-col items-center justify-center text-center" style="background-image: url('https://source.unsplash.com/1600x900/?gaming,esports');">
+        <div class="w-full h-full flex flex-col items-center justify-center bg-black bg-opacity-50 px-6">
+            <h2 class="text-5xl font-extrabold text-white drop-shadow-lg">Welcome to GameZone</h2>
+            <p class="text-2xl text-gray-200 mt-2">Your ultimate destination for gaming deals and action!</p>
+            <a href="#latest" class="mt-6 px-8 py-4 bg-yellow-500 text-black font-bold rounded-lg text-xl hover:bg-yellow-400 transition-all">Explore Now</a>
+        </div>
+    </section>
+    
+    <main class="container mx-auto py-12">
+        <section id="latest" class="py-12">
+            <h2 class="text-4xl font-bold text-center mb-8">🔥 Latest Games 🔥</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-8">
+                <script>
+                    let categories = ["fps", "rpg", "mmo", "arcade", "adventure", "puzzle", "horror", "shooter"];
+                    categories.forEach(cat => {
+                        document.write(`
+                            <div class="bg-gray-900 p-6 rounded-lg shadow-lg hover:scale-105 transition border-2 border-yellow-400 hover:shadow-yellow-500 hover:shadow-lg">
+                                <img src="https://source.unsplash.com/300x200/?${cat}-game" alt="${cat}" class="w-full h-48 object-cover rounded hover:opacity-80 transition">
+                                <h3 class="text-2xl font-bold mt-3">${cat.replace('-', ' ').toUpperCase()} Game</h3>
+                                <p class="text-gray-400">Experience the latest in ${cat} gaming.</p>
+                                <a href="#" class="mt-4 inline-block px-6 py-2 bg-blue-500 text-white font-bold rounded hover:bg-blue-400 transition">Play Now</a>
+                            </div>
+                        `);
+                    });
+                </script>
+            </div>
+        </section>
+        
+        <section id="trending" class="py-12">
+            <h2 class="text-4xl font-bold text-center mb-8">🔥 Trending Games 🔥</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-8">
+                <script>
+                    let trendingGames = ["battle", "open-world", "strategy", "sports", "multiplayer", "co-op", "zombie", "fantasy"];
+                    trendingGames.forEach(cat => {
+                        document.write(`
+                            <div class="bg-gray-900 p-6 rounded-lg shadow-lg hover:scale-105 transition border-2 border-yellow-400 hover:shadow-yellow-500 hover:shadow-lg">
+                                <img src="https://source.unsplash.com/300x200/?${cat}-game" alt="${cat}" class="w-full h-48 object-cover rounded hover:opacity-80 transition">
+                                <h3 class="text-2xl font-bold mt-3">${cat.replace('-', ' ').toUpperCase()} Game</h3>
+                                <p class="text-gray-400">Join the hype with ${cat} gaming.</p>
+                                <a href="#" class="mt-4 inline-block px-6 py-2 bg-blue-500 text-white font-bold rounded hover:bg-blue-400 transition">Play Now</a>
+                            </div>
+                        `);
+                    });
+                </script>
+            </div>
+        </section>
+        
+        <section id="upcoming" class="py-12">
+            <h2 class="text-4xl font-bold text-center mb-8">🚀 Upcoming Games 🚀</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-8">
+                <script>
+                    let upcomingGames = ["future", "sci-fi", "expansion", "beta", "preorder", "indie", "VR", "next-gen"];
+                    upcomingGames.forEach(cat => {
+                        document.write(`
+                            <div class="bg-gray-900 p-6 rounded-lg shadow-lg hover:scale-105 transition border-2 border-yellow-400 hover:shadow-yellow-500 hover:shadow-lg">
+                                <img src="https://source.unsplash.com/300x200/?${cat}-game" alt="${cat}" class="w-full h-48 object-cover rounded hover:opacity-80 transition">
+                                <h3 class="text-2xl font-bold mt-3">${cat.replace('-', ' ').toUpperCase()} Game</h3>
+                                <p class="text-gray-400">Be the first to experience ${cat} gaming.</p>
+                                <a href="#" class="mt-4 inline-block px-6 py-2 bg-blue-500 text-white font-bold rounded hover:bg-blue-400 transition">Pre-order Now</a>
+                            </div>
+                        `);
+                    });
+                </script>
+            </div>
+        </section>
+    </main>
+    
+    <section id="offers" class="container mx-auto py-12 bg-black bg-opacity-80 text-center rounded-lg shadow-lg p-6">
+      <h2 class="text-4xl font-bold mb-6 text-yellow-400">🎉 Special Offers 🎉</h2>
+      <p class="text-xl text-gray-300">Get up to <span class="text-yellow-500 font-bold">50% OFF</span> on top games this week!</p>
+      <a href="#" class="mt-6 inline-block px-8 py-4 bg-red-600 text-white font-bold rounded-lg text-xl hover:bg-red-500 transition-all">Grab the Deal</a>
+  </section>
+  
+  <section id="about" class="container mx-auto py-12 text-center">
+      <h2 class="text-4xl font-bold mb-6">About GameZone</h2>
+      <p class="text-lg text-gray-300">GameZone is the best place to find top-rated games, exclusive offers, and thrilling gaming experiences. Stay ahead with the latest trends in gaming.</p>
+  </section>
+  
+  <section id="contact" class="container mx-auto py-12 text-center">
+      <h2 class="text-4xl font-bold mb-6">Contact Us</h2>
+      <p class="text-lg text-gray-300">Need help or have an inquiry? Reach out to us!</p>
+      <a href="mailto:support@gamezone.com" class="text-yellow-400 font-bold text-xl hover:underline">support@gamezone.com</a>
+  </section>
+  
+  <footer class="bg-black text-center p-6 mt-10 text-gray-400">
+      <p>&copy; 2025 GameZone. All Rights Reserved.</p>
+  </footer>
+    <script>
+        function showPopup() {
+            document.getElementById("popup").classList.add("show");
+        }
+        function closePopup() {
+            document.getElementById("popup").classList.remove("show");
+        }
+        window.onload = function() {
+            setTimeout(showPopup, 3000); // Show popup after 3 seconds
+        };
+    </script>
+
+</body>
+</html>
