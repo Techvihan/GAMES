@@ -76,11 +76,37 @@
         #spinBtn {
             display: block;
         }
+        .mobile-menu {
+            display: none;
+        }
+        @media (max-width: 768px) {
+            .desktop-menu {
+                display: none;
+            }
+            .mobile-menu {
+                display: block;
+            }
+        }
+        #menu {
+            display: none;
+            position: absolute;
+            top: 60px;
+            right: 10px;
+            background: rgba(0, 0, 0, 0.9);
+            border-radius: 10px;
+            padding: 10px;
+            width: 200px;
+            z-index: 1001;
+        }
+        #menu.show {
+            display: block;
+        }
+
     </style>
 </head>
-<body class="bg-gradient-to-r from-purple-700 via-pink-600 to-red-500 text-white">
-    <div id="popup" class="popup-overlay">
-        <div class="popup-content">
+<body class="bg-gradient-to-r from-purple-700 via-pink-600 to-red-500 text-white md:auto">
+    <div id="popup" class="popup-overlay flex-shrink-0">
+        <div class="popup-content flex-shrink-0">
             <button class="close-btn" onclick="closePopup()">&times;</button>
             <h2 class="text-2xl font-bold text-yellow-400">🎰 Lucky Draw! 🎰</h2>
             <div id="spinWheel" class="spin-wheel"></div>
@@ -90,21 +116,20 @@
         </div>
     </div>
 
-    <header class="bg-black bg-opacity-80 p-5 shadow-lg">
-        <div class="container mx-auto flex justify-between items-center">
-            <h1 class="text-4xl font-extrabold text-yellow-400">GameZone</h1>
-            <nav>
-                <ul class="flex space-x-6 text-lg font-semibold">
+    <body class="bg-gradient-to-r from-purple-700 via-pink-600 to-red-500 text-white">
+        <header class="bg-black bg-opacity-80 p-5 shadow-lg flex justify-between items-center relative">
+            <h1 class="text-3xl font-extrabold text-yellow-400">GameZone</h1>
+            <button id="menuToggle" class="mobile-menu text-yellow-400 text-2xl">☰</button>
+            <nav id="menu" class="desktop-menu ">
+                <ul class="flex flex-col space-y-4 text-lg font-semibold">
                     <li><a href="#" class="hover:text-yellow-500">Home</a></li>
                     <li><a href="#latest" class="hover:text-yellow-500">Latest</a></li>
                     <li><a href="#trending" class="hover:text-yellow-500">Trending</a></li>
                     <li><a href="#upcoming" class="hover:text-yellow-500">Upcoming</a></li>
-                    <li><a href="#casino" class="hover:text-yellow-500">Casino</a></li>
                     <li><a href="#contact" class="hover:text-yellow-500">Contact</a></li>
                 </ul>
             </nav>
-        </div>
-    </header>
+        </header>
     
     <section class="relative w-full h-[500px] bg-cover bg-center flex flex-col items-center justify-center text-center" style="background-image: url('https://source.unsplash.com/1600x900/?gaming,esports');">
         <div class="w-full h-full flex flex-col items-center justify-center bg-black bg-opacity-50 px-6">
@@ -221,6 +246,12 @@
     window.onload = function() {
         setTimeout(showPopup, 3000);
     };
+</script>
+<script>
+    document.getElementById("menuToggle").addEventListener("click", function() {
+        const menu = document.getElementById("menu");
+        menu.classList.toggle("show");
+    });
 </script>
 
 </body>
