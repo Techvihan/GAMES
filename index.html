@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GameZone - Ultimate Gaming Hub</title>
     <script src="https://cdn.tailwindcss.com"></script>
-<style>
+    <style>
         .popup-overlay {
             position: fixed;
             top: 0;
@@ -24,11 +24,14 @@
         .popup-content {
             background: #1a1a1a;
             padding: 20px;
-            border-radius: 10px;
+            border-radius: 15px;
             text-align: center;
-            box-shadow: 0 0 15px rgba(255, 215, 0, 0.5);
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.7);
             transform: scale(0.8);
             transition: transform 0.5s ease;
+            position: relative;
+            width: 90%;
+            max-width: 500px;
         }
         .popup-overlay.show {
             opacity: 1;
@@ -38,16 +41,13 @@
             transform: scale(1);
         }
         .spin-wheel {
-            width: 100px;
-            height: 100px;
+            width: 150px;
+            height: 150px;
             border-radius: 50%;
-            background: conic-gradient(yellow 0deg, orange 90deg, red 180deg, purple 270deg, yellow 360deg);
-            animation: spin 3s linear infinite;
-            margin: 10px auto;
-        }
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+            background: conic-gradient(red 0deg, white 90deg, red 180deg, white 270deg, red 360deg);
+            margin: 20px auto;
+            border: 5px solid gold;
+            transition: transform 3s ease-out;
         }
         .popup-content button {
             margin-top: 10px;
@@ -58,17 +58,38 @@
             border-radius: 5px;
             cursor: pointer;
         }
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: red;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 50%;
+        }
+        #claimBtn {
+            display: none;
+        }
+        #spinBtn {
+            display: block;
+        }
     </style>
 </head>
 <body class="bg-gradient-to-r from-purple-700 via-pink-600 to-red-500 text-white">
-<div id="popup" class="popup-overlay">
+    <div id="popup" class="popup-overlay">
         <div class="popup-content">
-            <h2 class="text-3xl font-bold text-yellow-400">🎰 Free Spin Offer! 🎰</h2>
-            <div class="spin-wheel"></div>
-            <p class="text-gray-300 mt-2">Spin the wheel and win exciting rewards!</p>
-            <button onclick="closePopup()">Claim Now</button>
+            <button class="close-btn" onclick="closePopup()">&times;</button>
+            <h2 class="text-2xl font-bold text-yellow-400">🎰 Lucky Draw! 🎰</h2>
+            <div id="spinWheel" class="spin-wheel"></div>
+            <p id="result" class="text-gray-300 mt-2">Click to spin and win exciting rewards!</p>
+            <button class="w-full" id="spinBtn" onclick="spinWheel()">Spin Now</button>
+            <button class="w-full" id="claimBtn" onclick="claimReward()">Claim Now</button>
         </div>
     </div>
+
     <header class="bg-black bg-opacity-80 p-5 shadow-lg">
         <div class="container mx-auto flex justify-between items-center">
             <h1 class="text-4xl font-extrabold text-yellow-400">GameZone</h1>
@@ -172,17 +193,35 @@
   <footer class="bg-black text-center p-6 mt-10 text-gray-400">
       <p>&copy; 2025 GameZone. All Rights Reserved.</p>
   </footer>
-    <script>
-        function showPopup() {
-            document.getElementById("popup").classList.add("show");
-        }
-        function closePopup() {
-            document.getElementById("popup").classList.remove("show");
-        }
-        window.onload = function() {
-            setTimeout(showPopup, 3000); // Show popup after 3 seconds
-        };
-    </script>
+  <script>
+    function showPopup() {
+        document.getElementById("popup").classList.add("show");
+    }
+    function closePopup() {
+        document.getElementById("popup").classList.remove("show");
+    }
+    function spinWheel() {
+        const wheel = document.getElementById("spinWheel");
+        const result = document.getElementById("result");
+        const claimBtn = document.getElementById("claimBtn");
+        const spinBtn = document.getElementById("spinBtn");
+        const prizes = ["$50 Bonus", "$10 Bonus", "Free Spin", "Try Again", "$150 Bonus", "Jackpot!"];
+        const randomDegree = 1800 + Math.floor(Math.random() * 360);
+        wheel.style.transform = `rotate(${randomDegree}deg)`;
+        spinBtn.style.display = "none";
+        setTimeout(() => {
+            const prizeIndex = Math.floor(Math.random() * prizes.length);
+            result.innerText = `You won: ${prizes[prizeIndex]}!`;
+            claimBtn.style.display = "block";
+        }, 3000);
+    }
+    function claimReward() {
+        window.open("https://www.bitstarz.com/", "_blank");
+    }
+    window.onload = function() {
+        setTimeout(showPopup, 3000);
+    };
+</script>
 
 </body>
 </html>
